@@ -11,7 +11,7 @@ function NewsBit(props) {
             textAlign={newsItem !== undefined ? 'justified' : 'center'}
             style={{ fontSize: '18px', fontFamily: 'Open Sans', color: '#203174', marginBottom: '5px'}}>
             <p className={`element${highlighting ? " highlight" : ""}`}> 
-                {newsLoading ? "Loading..." : (newsItem !== undefined ? newsItem : "Well Done! Email phenomatix@gmail.com to request another Batch.")}
+                {newsLoading ? "Loading..." : (newsItem !== undefined ? newsItem : "Well Done! Email phenomatix@gmail.com to request another batch.")}
             </p>
         </Container>
     );
