@@ -69,7 +69,7 @@ function App() {
 
                         setTimeout(() => {
                           setHighlight(false);
-                        }, 2000);
+                        }, 1500);
 
                       } else {
                         setOpen(true);
