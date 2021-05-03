@@ -4,11 +4,13 @@ import 'semantic-ui-css/semantic.min.css'
 import { Icon, Container, Button, Segment, Grid, Modal } from 'semantic-ui-react'
 import { useGetNextNewsByUserID, useSetNewsItemProperties } from "./data";
 import CustomRadioGroup from './components/news-labels';
+import NewsBit from './components/news-bit';
 
 function App() {
 
   const userId = sessionStorage.getItem('userId');
   const [open, setOpen] = useState(false);
+  const [highlight, setHighlight] = useState(false);
 
   const [nextId, setNextId] = useState(0);
   const [newsLabels, setNewsLabels] = useState({ type: "0", category: "0", sentiment: "0" });
@@ -17,39 +19,35 @@ function App() {
   const { newsIdEcho } = useSetNewsItemProperties(userId, newsId, newsLabels);
 
   const newsType = ['News', 'Opinion'];
-  const newsCategory = ['Business/Finance', 'Crime', 'Education', 'Entertainment', 'Lifestyle/Health', 'Politics/Govt.', 'Religion', 'Sports', 'Science/Tech.'];
+  const newsCategory = ['Business/Finance','Crime/Security','Education','Entertainment','Govt./Politics','Health/Lifestyle','Religion','Science/Tech.','Sports'];
   const newsSentiment = ['Positive', 'Negative', 'Neutral'];
 
   return (
     <div className="App">
-      <Segment textAlign='center' style={{ height: '50px', paddingTop: '15px', marginBottom: '5px', backgroundColor:'#8ca18c' }}>
+      <Segment textAlign='center' style={{ height: '50px', paddingTop: '15px', color: '#203174', backgroundColor: '#7f9ade' }}>
         <span style={{ float: 'left', fontSize: '25px' }}><Icon name='newspaper outline' /></span>
         <span style={{ float: 'left', fontFamily: 'Audiowide', fontSize: '25px' }}>News Labeler</span>
-        <span style={{ float: 'right', fontSize: '18px', fontWeight: 'bold' }}>
+        <span style={{ float: 'right', fontSize: '18px', fontWeight: 'bold', color: '#203174' }}>
           {nextSerialNumber !== undefined ? `${newsLoading ? ".." : nextSerialNumber} of ${newsLoading ? ".." : totalItems}` : ""}
         </span>
       </Segment>
-      <Container
-        textAlign={newsItem !== undefined ? 'justified': 'center'}
-        style={{ fontSize: '18px', fontFamily: 'Open Sans', marginBottom: '5px' }}>
-        <p>{newsLoading ? "Loading..." : (newsItem !== undefined ? newsItem : "GREAT JOB! REQUEST MORE")}</p>
-      </Container>
+      <NewsBit newsItem={newsItem} newsLoading={newsLoading} highlighting={highlight}/>
       {nextSerialNumber !== undefined && (
         <Grid columns={2} key={nextId}>
           <Grid.Row>
             <Grid.Column style={{padding:'0px'}}>
-              <Segment style={{backgroundColor:'#d3ebd3', paddingLeft:'2em'}}>
+              <Segment style={{backgroundColor:'#b9d7f9', color: '#203174', paddingLeft:'2em'}}>
                 <CustomRadioGroup labels={newsCategory} labelsTitle='Category' />
               </Segment>
             </Grid.Column>
             <Grid.Column>
-              <Segment style={{backgroundColor:'#d3ebd3', paddingLeft:'2em'}}>
+              <Segment style={{backgroundColor:'#b9d7f9', color: '#203174', paddingLeft:'2em'}}>
                 <CustomRadioGroup labels={newsType} labelsTitle='Type' />
               </Segment>
-              <Segment style={{backgroundColor:'#d3ebd3', paddingLeft:'2em'}}>
+              <Segment style={{backgroundColor:'#b9d7f9', color: '#203174', paddingLeft:'2em'}}>
                 <CustomRadioGroup labels={newsSentiment} labelsTitle='Sentiment' />
                 <Button
-                  style={{ float: 'right', marginTop: '33px', marginRight: '25px', fontFamily: 'Open Sans', backgroundColor:'#e57373'}}
+                  style={{ float: 'right', marginTop: '33px', marginRight: '25px', fontFamily: 'Open Sans', color: '#203174', backgroundColor:'#f5cddf'}}
                   size='large'
                   disabled={false}
                   onClick={() => {
@@ -63,10 +61,16 @@ function App() {
                         sessionStorage.setItem('type', 0);
                         sessionStorage.setItem('category', 0);
                         sessionStorage.setItem('sentiment', 0);
-
+ 
                         setOpen(false);
                         setNewsLabels(labels);
                         setNextId(nextSerialNumber + 1);
+                        setHighlight(true);
+
+                        setTimeout(() => {
+                          setHighlight(false);
+                        }, 2000);
+
                       } else {
                         setOpen(true);
                       }
@@ -78,9 +82,9 @@ function App() {
                   open={open}
                   onClose={() => setOpen(false)}
                   onOpen={() => setOpen(true)}>
-                  <Modal.Header className='modal-header'>Action Needed!</Modal.Header>
+                  <Modal.Header className='modal-header'><span style={{color: 'red'}}>Action Needed!</span></Modal.Header>
                   <Modal.Content>
-                    <Modal.Description style={{fontFamily: 'Open Sans', fontSize: '20px', backgroundColor:'#d3ebd3'}}>
+                    <Modal.Description style={{fontFamily: 'Open Sans', color: '#203174', fontSize: '20px'}}>
                       <Container textAlign='center'>
                         {`You Must Make a Selection For Type, Category and Sentiment.`}
                       </Container> 

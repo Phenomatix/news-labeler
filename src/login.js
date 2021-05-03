@@ -20,18 +20,20 @@ function LoginForm() {
 
     return (
         <div className="App">
-            <Segment textAlign='center' style={{ height: '50px', paddingTop: '15px', backgroundColor: '#8ca18c' }}>
+            <Segment textAlign='center' style={{ height: '50px', paddingTop: '15px', color: '#203174', backgroundColor: '#7f9ade' }}>
                 <span style={{ float: 'left', fontSize: '25px' }}><Icon name='newspaper outline' /></span>
                 <span style={{ float: 'left', fontFamily: 'Audiowide', fontSize: '25px' }}>News Labeler</span>
             </Segment>
-            <Segment style={{ backgroundColor: '#c8e6c9', marginTop: '100px' }}>
-                <Form>
+            <Segment style={{ backgroundColor: '#b9d7f9', marginTop: '100px', color: '#203174'}}>
+                <Form size='huge'>
                     <Form.Group widths='equal'>
                         <Form.Input
+                            style={{ fontFamily: 'Open Sans'}}
                             fluid label='User ID'
                             placeholder='User name'
                             onChange={e => setUserId(e.target.value)} />
                         <Form.Input
+                            style={{ fontFamily: 'Open Sans'}}
                             fluid label='Password'
                             placeholder='Password'
                             type='password'
@@ -40,7 +42,7 @@ function LoginForm() {
 
                 </Form>
             </Segment>
-            <Button style={{ float: 'right', fontFamily: 'Open Sans', backgroundColor: '#e57373' }}
+            <Button style={{ float: 'right', fontFamily: 'Open Sans', color: '#203174', backgroundColor: '#f5cddf' }}
                 type='submit' size='large' onClick={handleClick}>Submit</Button>
         </div>
     );

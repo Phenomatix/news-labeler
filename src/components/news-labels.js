@@ -19,7 +19,7 @@ function CustomRadioGroup(props) {
       {labels.map((i) => (
         <Form.Field key={labelsTitle + `${i}`}>
           <Radio
-            style={{ textAlign: 'left', fontSize: '17px', fontFamily: 'Open Sans' }}
+            style={{ textAlign: 'left', fontSize: '17px', color: '#203174', fontFamily: 'Open Sans' }}
             label={i}
             name={labelsTitle}
             value={k++}

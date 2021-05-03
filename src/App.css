@@ -3,6 +3,7 @@
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 5px;
+  color: #203174;
 }
 
 .App-logo {
@@ -33,7 +34,24 @@
 
 .modal-header {
   text-align: center; 
-  color:orange;
+}
+
+.element {
+  -moz-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  color: #203174;
+}
+
+.highlight {
+  background-color: #f7f2db;
+}
+
+.newsbit {
+  font-size: '18px';
+  font-family: 'Open Sans';
+  margin-bottom: '5px'
 }
 
 @keyframes App-logo-spin {
